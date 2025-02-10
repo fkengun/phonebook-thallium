@@ -6,9 +6,9 @@
 #include <catch2/catch_test_macros.hpp>
 #include <catch2/catch_all.hpp>
 #include "Ensure.hpp"
-#include <alpha/Client.hpp>
-#include <alpha/Provider.hpp>
-#include <alpha/ResourceHandle.hpp>
+#include <YP/Client.hpp>
+#include <YP/Provider.hpp>
+#include <YP/PhonebookHandle.hpp>
 
 TEST_CASE("Client test", "[client]") {
 
@@ -17,24 +17,24 @@ TEST_CASE("Client test", "[client]") {
     // Initialize the provider
     const auto provider_config = R"(
     {
-        "resource": {
+        "phonebook": {
             "type": "dummy",
             "config": {}
         }
     }
     )";
 
-    alpha::Provider provider(engine, 42, provider_config);
+    YP::Provider provider(engine, 42, provider_config);
 
-    SECTION("Open resource") {
+    SECTION("Open phonebook") {
 
-        alpha::Client client(engine);
+        YP::Client client(engine);
         std::string addr = engine.self();
 
-        alpha::ResourceHandle my_resource = client.makeResourceHandle(addr, 42);
-        REQUIRE(static_cast<bool>(my_resource));
+        YP::PhonebookHandle my_phonebook = client.makePhonebookHandle(addr, 42);
+        REQUIRE(static_cast<bool>(my_phonebook));
 
-        REQUIRE_THROWS_AS(client.makeResourceHandle(addr, 55), alpha::Exception);
-        REQUIRE_NOTHROW(client.makeResourceHandle(addr, 55, false));
+        REQUIRE_THROWS_AS(client.makePhonebookHandle(addr, 55), YP::Exception);
+        REQUIRE_NOTHROW(client.makePhonebookHandle(addr, 55, false));
     }
 }

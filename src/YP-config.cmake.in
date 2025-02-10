@@ -1,0 +1,22 @@
+#
+# YP-config.cmake.in
+#
+
+set (YP_VERSION @YP_VERSION@)
+
+@PACKAGE_INIT@
+
+set_and_check (YP_INCLUDE_DIR "@PACKAGE_INCLUDE_INSTALL_DIR@")
+
+check_required_components (YP)
+
+include (CMakeFindDependencyMacro)
+find_dependency (thallium)
+find_dependency (PkgConfig)
+
+# FIXME: add more dependencies if needed
+
+include ("${CMAKE_CURRENT_LIST_DIR}/YP-targets.cmake")
+
+add_library (YP::server ALIAS YP-server)
+add_library (YP::client ALIAS YP-client)

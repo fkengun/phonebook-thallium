@@ -3,21 +3,21 @@
  *
  * See COPYRIGHT in top-level directory.
  */
-#include "alpha/ResourceInterface.hpp"
+#include "YP/PhonebookInterface.hpp"
 
 namespace tl = thallium;
 
-namespace alpha {
+namespace YP {
 
 using json = nlohmann::json;
 
 std::unordered_map<std::string,
-                std::function<std::unique_ptr<ResourceInterface>(const tl::engine&, const json&)>> ResourceFactory::create_fn;
+                std::function<std::unique_ptr<PhonebookInterface>(const tl::engine&, const json&)>> PhonebookFactory::create_fn;
 
 std::unordered_map<std::string,
-                std::function<std::unique_ptr<ResourceInterface>(const tl::engine&, const json&)>> ResourceFactory::open_fn;
+                std::function<std::unique_ptr<PhonebookInterface>(const tl::engine&, const json&)>> PhonebookFactory::open_fn;
 
-std::unique_ptr<ResourceInterface> ResourceFactory::createResource(
+std::unique_ptr<PhonebookInterface> PhonebookFactory::createPhonebook(
         const std::string& backend_name,
         const tl::engine& engine,
         const json& config) {
@@ -27,7 +27,7 @@ std::unique_ptr<ResourceInterface> ResourceFactory::createResource(
     return f(engine, config);
 }
 
-std::unique_ptr<ResourceInterface> ResourceFactory::openResource(
+std::unique_ptr<PhonebookInterface> PhonebookFactory::openPhonebook(
         const std::string& backend_name,
         const tl::engine& engine,
         const json& config) {

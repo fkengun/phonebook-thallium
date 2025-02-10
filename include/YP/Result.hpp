@@ -3,14 +3,14 @@
  *
  * See COPYRIGHT in top-level directory.
  */
-#ifndef __ALPHA_RESULT_HPP
-#define __ALPHA_RESULT_HPP
+#ifndef __YP_RESULT_HPP
+#define __YP_RESULT_HPP
 
 #include <thallium/serialization/stl/string.hpp>
-#include <alpha/Exception.hpp>
+#include <YP/Exception.hpp>
 #include <string>
 
-namespace alpha {
+namespace YP {
 
 /**
  * @brief The Result object is a generic object

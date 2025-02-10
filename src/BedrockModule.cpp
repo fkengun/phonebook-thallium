@@ -3,25 +3,25 @@
  *
  * See COPYRIGHT in top-level directory.
  */
-#include "alpha/Client.hpp"
-#include "alpha/Provider.hpp"
-#include "alpha/ProviderHandle.hpp"
+#include "YP/Client.hpp"
+#include "YP/Provider.hpp"
+#include "YP/ProviderHandle.hpp"
 
 #include <bedrock/AbstractComponent.hpp>
 
 namespace tl = thallium;
 
-class AlphaComponent : public bedrock::AbstractComponent {
+class YpComponent : public bedrock::AbstractComponent {
 
-    std::unique_ptr<alpha::Provider> m_provider;
+    std::unique_ptr<YP::Provider> m_provider;
 
     public:
 
-    AlphaComponent(const tl::engine& engine,
+    YpComponent(const tl::engine& engine,
                     uint16_t  provider_id,
                     const std::string& config,
                     const tl::pool& pool)
-    : m_provider{std::make_unique<alpha::Provider>(engine, provider_id, config, pool)}
+    : m_provider{std::make_unique<YP::Provider>(engine, provider_id, config, pool)}
     {}
 
     void* getHandle() override {
@@ -39,7 +39,7 @@ class AlphaComponent : public bedrock::AbstractComponent {
             if(it != args.dependencies.end() && !it->second.empty()) {
                 pool = it->second[0]->getHandle<tl::pool>();
             }
-            return std::make_shared<AlphaComponent>(
+            return std::make_shared<YpComponent>(
                 args.engine, args.provider_id, args.config, pool);
         }
 
@@ -59,4 +59,4 @@ class AlphaComponent : public bedrock::AbstractComponent {
         }
 };
 
-BEDROCK_REGISTER_COMPONENT_TYPE(alpha, AlphaComponent)
+BEDROCK_REGISTER_COMPONENT_TYPE(YP, YpComponent)

@@ -6,27 +6,27 @@
 #include <catch2/catch_test_macros.hpp>
 #include <catch2/catch_all.hpp>
 #include "Ensure.hpp"
-#include <alpha/Client.hpp>
-#include <alpha/Provider.hpp>
+#include <YP/Client.hpp>
+#include <YP/Provider.hpp>
 
-TEST_CASE("Resource test", "[resource]") {
+TEST_CASE("Phonebook test", "[phonebook]") {
     auto engine = thallium::engine("na+sm", THALLIUM_SERVER_MODE);
     ENSURE(engine.finalize());
     const auto provider_config = R"(
     {
-        "resource": {
+        "phonebook": {
             "type": "dummy",
             "config": {}
         }
     }
     )";
-    alpha::Provider provider(engine, 42, provider_config);
+    YP::Provider provider(engine, 42, provider_config);
 
-    SECTION("Create ResourceHandle") {
-        alpha::Client client(engine);
+    SECTION("Create PhonebookHandle") {
+        YP::Client client(engine);
         std::string addr = engine.self();
 
-        auto rh = client.makeResourceHandle(addr, 42);
+        auto rh = client.makePhonebookHandle(addr, 42);
 
         SECTION("Send Sum RPC") {
             int32_t result;

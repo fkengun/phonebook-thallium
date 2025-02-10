@@ -3,16 +3,16 @@
  *
  * See COPYRIGHT in top-level directory.
  */
-#ifndef __ALPHA_FUTURE_HPP
-#define __ALPHA_FUTURE_HPP
+#ifndef __YP_FUTURE_HPP
+#define __YP_FUTURE_HPP
 
-#include <alpha/Exception.hpp>
-#include <alpha/Result.hpp>
+#include <YP/Exception.hpp>
+#include <YP/Result.hpp>
 #include <thallium.hpp>
 #include <memory>
 #include <functional>
 
-namespace alpha {
+namespace YP {
 
 /**
  * @brief Future objects are used to keep track of
